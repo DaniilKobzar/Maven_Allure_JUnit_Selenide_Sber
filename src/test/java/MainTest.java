@@ -40,7 +40,7 @@ public class MainTest {
     @Severity(value = SeverityLevel.BLOCKER)
     public void openWebsite (){
         steps.openWebsite(1);
-        steps.makeScreenshot("screen");
+        //steps.makeScreenshot("screen");
         steps.checkLicenseTextOnMainPage(2);
     }
 

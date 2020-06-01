@@ -1,13 +1,11 @@
 package PageObj;
 
-import com.codeborne.selenide.Condition;
+
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BasePage {

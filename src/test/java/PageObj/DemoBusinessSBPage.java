@@ -6,7 +6,7 @@ import static com.codeborne.selenide.Selectors.by;
 import static com.codeborne.selenide.Selenide.$;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class DemoBussinesSBPage {
+public class DemoBusinessSBPage {
 
     @Step("Step {step}. Проверить отображение элемента с текстом \"Иванов Иван Иванович\"")
     public void checkSuccessBusinessOnlineLogin(int step){

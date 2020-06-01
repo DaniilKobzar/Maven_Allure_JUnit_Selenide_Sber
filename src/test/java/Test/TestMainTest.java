@@ -17,7 +17,7 @@ public class TestMainTest {
     private BasePage basePage = new BasePage();
     private SearchPage searchPage = new SearchPage();
     private DemoSBPage demoSBPage = new DemoSBPage();
-    private DemoBussinesSBPage demoBussinesSBPage = new DemoBussinesSBPage();
+    private DemoBusinessSBPage demoBusinessSBPage = new DemoBusinessSBPage();
     private AboutBankPage aboutBankPage = new AboutBankPage();
     private SearchVacancyPage searchVacancyPage = new SearchVacancyPage();
 
@@ -91,8 +91,8 @@ public class TestMainTest {
         searchPage.clickOnSearchResults(3,"Сбербанк Бизнес Онлайн");
         steps.closeNeedlessTab();
         steps.clickOnWebElement(4, "Демо-доступ");
-        steps.clickOnDemoMode(5);
-        demoBussinesSBPage.checkSuccessBusinessOnlineLogin(6);
+        //steps.clickOnDemoMode(5); //этот шаг больше не актуален, сайт изменился, этой страницы нет.
+        demoBusinessSBPage.checkSuccessBusinessOnlineLogin(5);
     }
 
     @Test

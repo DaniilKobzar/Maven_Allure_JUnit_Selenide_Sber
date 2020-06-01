@@ -5,8 +5,11 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selectors.by;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class StepsAll {
@@ -37,6 +40,5 @@ public class StepsAll {
     public void scrollToBottomOfPage(){
         Selenide.executeJavaScript("window.scrollBy(0,10000)");
     }
-
 
 }

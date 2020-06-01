@@ -9,12 +9,12 @@ public class AboutBankPage {
 
     @Step("Step {step}. Внизу страницы информации о банке есть текст \"Страница была вам полезна?\" кликнуть на ответ \"да\"")
     public void clickOnLike(int step){
-        $(By.xpath("//i[contains(@class,'like-form__icon-like')]//*[local-name()='svg']")).click();
+        $(By.xpath("//label[1]//span[1]")).click();
     }
 
     @Step("Step {step}. В поле для отзыва ввести текст")
     public void typeOpinionText(int step){
-        $(By.xpath("//textarea[@placeholder='Что мы могли бы улучшить?']")).setValue("Все здорово!");
+        $(By.xpath("//textarea[contains(@placeholder,'Будем рады любому вашему комментарию или предложению')]")).setValue("Все здорово!");
     }
 
 }

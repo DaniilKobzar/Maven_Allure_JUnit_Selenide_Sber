@@ -1,9 +1,13 @@
 package PageObj;
 
+import com.codeborne.selenide.Condition;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BasePage {
@@ -23,6 +27,13 @@ public class BasePage {
     public void typeWordToSearch(int step, String word){
         $(By.xpath("//div[@class='ya-site-form-search__button ya-site-form-search_visible ']")).click();
         $(By.className("ya-site-form__input-text")).setValue(word).pressEnter();
+    }
+
+    @Step("Step {step}. Кликнуть на: {webElement}")
+    public void clickOnAboutBank(int step){
+        String aboutBank = "//div[contains(@class,'kit-col kit-col_xs_12 kit-col_md_7 kit-col_lg_7 footer__subfooter-col')]//li[2]//a[1]";
+        $(byXpath(aboutBank)).scrollIntoView(true);
+        $(byXpath(aboutBank)).click();
     }
 
 }

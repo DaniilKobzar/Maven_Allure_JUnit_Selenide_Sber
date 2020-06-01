@@ -25,7 +25,7 @@ public class TestMainTest {
 
     @BeforeAll
     public static void setUp() {
-        Configuration.timeout = 25000;
+        Configuration.timeout = 5000;
         Configuration.headless = false;
         clearBrowserCache();
         SelenideLogger.addListener("AllureSelenide",
@@ -117,7 +117,7 @@ public class TestMainTest {
     @Severity(value = SeverityLevel.NORMAL)
     public void rateBank (){
         steps.openWebsite(1);
-        steps.clickOnWebElement(2,"О банке");
+        basePage.clickOnAboutBank(2);
         steps.scrollToBottomOfPage();
         aboutBankPage.clickOnLike(3);
         aboutBankPage.typeOpinionText(4);

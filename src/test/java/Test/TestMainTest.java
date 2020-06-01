@@ -1,16 +1,27 @@
-import CoreLogic.AllureSteps;
+package Test;
+
+import PageObj.*;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.*;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+
+import static com.codeborne.selenide.WebDriverRunner.*;
+
+public class TestMainTest {
+
+    private StepsAll steps = new StepsAll();
+    private BasePage basePage = new BasePage();
+    private SearchPage searchPage = new SearchPage();
+    private DemoSBPage demoSBPage = new DemoSBPage();
+    private DemoBussinesSBPage demoBussinesSBPage = new DemoBussinesSBPage();
+    private AboutBankPage aboutBankPage = new AboutBankPage();
+    private SearchVacancyPage searchVacancyPage = new SearchVacancyPage();
 
 
-import static com.codeborne.selenide.WebDriverRunner.clearBrowserCache;
-import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
-
-public class MainTest {
-    private AllureSteps steps = new AllureSteps();
 
     @BeforeAll
     public static void setUp() {
@@ -24,12 +35,23 @@ public class MainTest {
     }
 
 
+
+    @AfterEach
+    public void afterEach(){
+        attachScreenshot("Last screenshot");
+    }
+
+    @Attachment(value = "{attachName}", type = "image/png")
+    public static byte[] attachScreenshot(String attachName) {
+        return ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES);
+    }
+
+
     @AfterAll
     public static void tearDown() {
         SelenideLogger.removeListener("allure");
         closeWebDriver();
     }
-
 
 
     @Test
@@ -38,8 +60,8 @@ public class MainTest {
     @Epic("Смок тесты")
     @Severity(value = SeverityLevel.BLOCKER)
     public void openWebsite (){
-        steps.openWebsite();
-        steps.checkLicenseTextOnMainPage();
+        steps.openWebsite(1);
+        basePage.checkLicenseTextOnMainPage(2);
     }
 
     @Test
@@ -49,12 +71,12 @@ public class MainTest {
     @Feature("Тестирование онлайн кабинетов")
     @Severity(value = SeverityLevel.CRITICAL)
     public void findAndLoginDemoCabinet (){
-        steps.openWebsite();
-        steps.typeWordToSearch("Демо-версия Сбербанк Онлайн");
-        steps.clickOnSearchResults("Демо-версия Сбербанк Онлайн");
+        steps.openWebsite(1);
+        basePage.typeWordToSearch(2, "Демо-версия Сбербанк Онлайн");
+        searchPage.clickOnSearchResults(3,"Демо-версия Сбербанк Онлайн");
         steps.closeNeedlessTab();
-        steps.closePopUp();
-        steps.checkSuccessSbolLogin();
+        demoSBPage.closePopUp();
+        demoSBPage.checkSuccessSbolLogin(4);
     }
 
     @Test
@@ -64,13 +86,13 @@ public class MainTest {
     @Feature("Тестирование онлайн кабинетов")
     @Severity(value = SeverityLevel.CRITICAL)
     public void findAndLoginBusinessDemoCabinet (){
-        steps.openWebsite();
-        steps.typeWordToSearch("Бизнес онлайн");
-        steps.clickOnSearchResults("Сбербанк Бизнес Онлайн");
+        steps.openWebsite(1);
+        basePage.typeWordToSearch(2,"Бизнес онлайн");
+        searchPage.clickOnSearchResults(3,"Сбербанк Бизнес Онлайн");
         steps.closeNeedlessTab();
-        steps.clickOnWebElement("Демо-доступ");
-        steps.clickOnDemoMode();
-        steps.checkSuccessBusinessOnlineLogin();
+        steps.clickOnWebElement(4, "Демо-доступ");
+        steps.clickOnDemoMode(5);
+        demoBussinesSBPage.checkSuccessBusinessOnlineLogin(6);
     }
 
     @Test
@@ -79,14 +101,13 @@ public class MainTest {
     @Description(value = "Ищем вакансию для Java разработчика")
     @Epic("Регресс тесты")
     @Severity(value = SeverityLevel.NORMAL)
-    //@RepeatedTest(1)
     public void searchVacancy () {
-        steps.openWebsite();
+        steps.openWebsite(1);
         steps.scrollToBottomOfPage();
-        steps.clickOnWebElementVacancy("Вакансии");
-        steps.searchVacancy("Java разработчик");
+        steps.clickOnWebElement(2, "Вакансии");
+        searchVacancyPage.searchVacancy(3, "Java разработчик");
         steps.closeNeedlessTab();
-        steps.clickOnWebElementSearchVacancy("Java разработчик");
+        steps.clickOnWebElement(4,"Java разработчик");
     }
 
     @Test
@@ -95,12 +116,14 @@ public class MainTest {
     @Epic("Смок тесты")
     @Severity(value = SeverityLevel.NORMAL)
     public void rateBank (){
-        steps.openWebsite();
-        steps.clickOnWebElementBank("О банке");
+        steps.openWebsite(1);
+        steps.clickOnWebElement(2,"О банке");
         steps.scrollToBottomOfPage();
-        steps.clickOnLike();
-        steps.typeOpinionText();
-        steps.clickOnWebElementSend("Отправить");
+        aboutBankPage.clickOnLike(3);
+        aboutBankPage.typeOpinionText(4);
+        steps.clickOnWebElement(5,"Отправить");
     }
 
 }
+
+

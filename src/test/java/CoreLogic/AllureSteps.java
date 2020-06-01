@@ -1,23 +1,8 @@
 package CoreLogic;
+
 import com.codeborne.selenide.*;
-import com.google.common.io.Files;
-import io.qameta.allure.Allure;
-import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 import static com.codeborne.selenide.Selectors.by;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -26,14 +11,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class AllureSteps {
 
 
-    @Step("Step {step}. Перейти на сайт \"https://www.sberbank.ru/ru/person\"")
-    public void openWebsite(int step){
+    @Step("Step 1. Перейти на сайт \"https://www.sberbank.ru/ru/person\"")
+    public void openWebsite(){
         open("https://www.sberbank.ru/ru/");
-        System.out.println("Step "+step+" success");
     }
 
-    @Step("Step {step}. Проверить отображение элемента с текстом и номером лицензии на главной странице")
-    public void checkLicenseTextOnMainPage(int step) {
+    @Step("Step 2. Проверить отображение элемента с текстом и номером лицензии на главной странице")
+    public void checkLicenseTextOnMainPage() {
         String availableText = $(By.xpath("//div[@class='footer__info']//p[contains(text(),'лицензия')]")).getText();
         assertTrue(availableText.contains("Генеральная лицензия на осуществление банковских операций от 11 августа 2015 года. Регистрационный номер — 1481."));
     }
@@ -44,10 +28,6 @@ public class AllureSteps {
         $(By.className("ya-site-form__input-text")).setValue(word).pressEnter();
     }
 
-//    @Step("Вводим слово: {word} для поиска")
-//    public void typeWordToSearch(String word){
-//        $(By.className("ya-site-form__input-text")).setValue(word).pressEnter();
-//    }
 
     @Step("Step 3. Из списка вариантов выбрать ссылку с текстом: {searchResults} и перейти по ней")
     public void clickOnSearchResults(String searchResults){
@@ -128,17 +108,18 @@ public class AllureSteps {
         assertTrue(textToCheck.contains("Иванов Иван Иванович"));
     }
 
-    public String getCurrentDateAndTime() {
-        DateFormat dateFormat = new SimpleDateFormat("HH.mm.ss");
-        Date today = Calendar.getInstance().getTime();
-        String date = dateFormat.format(today);
-        return date;
-    }
-
-    public void makeScreenshot(String fileName) {
-        try {
-            Allure.addAttachment(fileName + ".png", new FileInputStream(screenshot(fileName+getCurrentDateAndTime())));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }}
+//    еще один вариант просто делать скриншоты, явно указывая в шагах теста метод makeScreenshot("Имя_файла")
+//    public String getCurrentDateAndTime() {
+//        DateFormat dateFormat = new SimpleDateFormat("HH.mm.ss");
+//        Date today = Calendar.getInstance().getTime();
+//        String date = dateFormat.format(today);
+//        return date;
+//    }
+//
+//    public void makeScreenshot(String fileName) {
+//        try {
+//            Allure.addAttachment(fileName + ".png", new FileInputStream(screenshot(fileName+getCurrentDateAndTime())));
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }}
 }

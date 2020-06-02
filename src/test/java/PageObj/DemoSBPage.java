@@ -4,6 +4,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DemoSBPage {
@@ -20,4 +21,11 @@ public class DemoSBPage {
         assertTrue(textToCheck.contains("Демо-версия"));
     }
 
+    @Step("Закрываем ненужную вкладку браузера")
+    public void closeNeedlessTab(){
+        switchTo().window(0).close();
+        switchTo().window(0);
+    }
+
 }
+

@@ -13,13 +13,12 @@ import static com.codeborne.selenide.WebDriverRunner.*;
 
 public class TestMainTest {
 
-    private StepsAll steps = new StepsAll();
-    private BasePage basePage = new BasePage();
-    private SearchPage searchPage = new SearchPage();
-    private DemoSBPage demoSBPage = new DemoSBPage();
-    private DemoBusinessSBPage demoBusinessSBPage = new DemoBusinessSBPage();
-    private AboutBankPage aboutBankPage = new AboutBankPage();
-    private SearchVacancyPage searchVacancyPage = new SearchVacancyPage();
+    private BasePage basePageSteps = new BasePage();
+    private SearchPage searchPageSteps = new SearchPage();
+    private DemoSBPage demoSBPageSteps = new DemoSBPage();
+    private DemoBusinessSBPage demoBusinessSBPageSteps = new DemoBusinessSBPage();
+    private AboutBankPage aboutBankPageSteps = new AboutBankPage();
+    private SearchVacancyPage searchVacancyPageSteps = new SearchVacancyPage();
 
 
 
@@ -60,8 +59,8 @@ public class TestMainTest {
     @Epic("Смок тесты")
     @Severity(value = SeverityLevel.BLOCKER)
     public void openWebsite (){
-        steps.openWebsite(1);
-        basePage.checkLicenseTextOnMainPage(2);
+        basePageSteps.openWebsite(1);
+        basePageSteps.checkLicenseTextOnMainPage(2);
     }
 
     @Test
@@ -71,12 +70,12 @@ public class TestMainTest {
     @Feature("Тестирование онлайн кабинетов")
     @Severity(value = SeverityLevel.CRITICAL)
     public void findAndLoginDemoCabinet (){
-        steps.openWebsite(1);
-        basePage.typeWordToSearch(2, "Демо-версия Сбербанк Онлайн");
-        searchPage.clickOnSearchResults(3,"Демо-версия Сбербанк Онлайн");
-        steps.closeNeedlessTab();
-        demoSBPage.closePopUp();
-        demoSBPage.checkSuccessSbolLogin(4);
+        basePageSteps.openWebsite(1);
+        basePageSteps.typeWordToSearch(2, "Демо-версия Сбербанк Онлайн");
+        searchPageSteps.clickOnSearchResults(3,"Демо-версия Сбербанк Онлайн");
+        demoSBPageSteps.closeNeedlessTab();
+        demoSBPageSteps.closePopUp();
+        demoSBPageSteps.checkSuccessSbolLogin(4);
     }
 
     @Test
@@ -86,13 +85,13 @@ public class TestMainTest {
     @Feature("Тестирование онлайн кабинетов")
     @Severity(value = SeverityLevel.CRITICAL)
     public void findAndLoginBusinessDemoCabinet (){
-        steps.openWebsite(1);
-        basePage.typeWordToSearch(2,"Бизнес онлайн");
-        searchPage.clickOnSearchResults(3,"Сбербанк Бизнес Онлайн");
-        steps.closeNeedlessTab();
-        steps.clickOnWebElement(4, "Демо-доступ");
-        //steps.clickOnDemoMode(5); //этот шаг больше не актуален, сайт изменился, этой страницы нет.
-        demoBusinessSBPage.checkSuccessBusinessOnlineLogin(5);
+        basePageSteps.openWebsite(1);
+        basePageSteps.typeWordToSearch(2,"Бизнес онлайн");
+        searchPageSteps.clickOnSearchResults(3,"Сбербанк Бизнес Онлайн");
+        demoBusinessSBPageSteps.closeNeedlessTab();
+        demoBusinessSBPageSteps.clickOnWebElement(4, "Демо-доступ");
+        //demoBusinessSBPageSteps.clickOnDemoMode(5); //этот шаг больше не актуален, сайт изменился, этой страницы нет.
+        demoBusinessSBPageSteps.checkSuccessBusinessOnlineLogin(5);
     }
 
     @Test
@@ -102,12 +101,12 @@ public class TestMainTest {
     @Epic("Регресс тесты")
     @Severity(value = SeverityLevel.NORMAL)
     public void searchVacancy () {
-        steps.openWebsite(1);
-        steps.scrollToBottomOfPage();
-        steps.clickOnWebElement(2, "Вакансии");
-        searchVacancyPage.searchVacancy(3, "Java разработчик");
-        steps.closeNeedlessTab();
-        steps.clickOnWebElement(4,"Java разработчик");
+        basePageSteps.openWebsite(1);
+        basePageSteps.scrollToBottomOfPage();
+        basePageSteps.clickOnWebElement(2, "Вакансии");
+        searchVacancyPageSteps.searchVacancy(3, "Java разработчик");
+        searchVacancyPageSteps.closeNeedlessTab();
+        searchVacancyPageSteps.clickOnWebElement(4,"Java разработчик");
     }
 
     @Test
@@ -116,12 +115,12 @@ public class TestMainTest {
     @Epic("Смок тесты")
     @Severity(value = SeverityLevel.NORMAL)
     public void rateBank (){
-        steps.openWebsite(1);
-        basePage.clickOnAboutBank(2);
-        steps.scrollToBottomOfPage();
-        aboutBankPage.clickOnLike(3);
-        aboutBankPage.typeOpinionText(4);
-        steps.clickOnWebElement(5,"Отправить");
+        basePageSteps.openWebsite(1);
+        basePageSteps.clickOnAboutBank(2);
+        basePageSteps.scrollToBottomOfPage();
+        aboutBankPageSteps.clickOnLike(3);
+        aboutBankPageSteps.typeOpinionText(4);
+        aboutBankPageSteps.clickOnWebElement(5,"Отправить");
     }
 
 }

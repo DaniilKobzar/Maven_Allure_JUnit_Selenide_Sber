@@ -9,9 +9,11 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class SearchVacancyPage {
 
+    private String search_textLabel = "career__search-input";
+
     @Step("Step {step}. Ввести в поле \"поиск вакансий\" - {vacancyName}")
     public void searchVacancy(int step, String vacancyName){
-        $(By.className("career__search-input")).setValue(""+vacancyName+"").pressEnter();
+        $(By.className(search_textLabel)).setValue(""+vacancyName+"").pressEnter();
     }
 
     @Step("Закрываем ненужную вкладку браузера")

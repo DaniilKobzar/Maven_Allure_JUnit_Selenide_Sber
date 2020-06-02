@@ -9,15 +9,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DemoSBPage {
 
+    private String closeHelp_button = "//a[@class='close']";
+
+    private String heading_text = "//div[@class='simulator-title']";
+
     @Step("Закрываем всплывающее окно")
     public void closePopUp(){
-        $(By.xpath("//a[@class='close']")).click();
+        $(By.xpath(closeHelp_button)).click();
 
     }
 
     @Step("Step {step}. Проверить отображение элемента с текстом \"Демо-версия\"")
     public void checkSuccessSbolLogin(int step){
-        String textToCheck = $(By.xpath("//div[@class='simulator-title']")).getText();
+        String textToCheck = $(By.xpath(heading_text)).getText();
         assertTrue(textToCheck.contains("Демо-версия"));
     }
 

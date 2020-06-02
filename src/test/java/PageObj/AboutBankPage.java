@@ -10,14 +10,19 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class AboutBankPage {
 
+    private String bankInfo_textLink = "//label[1]//span[1]";
+
+    private String myOpinion_textLabel = "//textarea[contains(@placeholder,'Будем рады любому вашему комментарию или предложению')]";
+
+
     @Step("Step {step}. Внизу страницы информации о банке есть текст \"Страница была вам полезна?\" кликнуть на ответ \"да\"")
     public void clickOnLike(int step){
-        $(By.xpath("//label[1]//span[1]")).click();
+        $(By.xpath(bankInfo_textLink)).click();
     }
 
     @Step("Step {step}. В поле для отзыва ввести текст")
     public void typeOpinionText(int step){
-        $(By.xpath("//textarea[contains(@placeholder,'Будем рады любому вашему комментарию или предложению')]")).setValue("Все здорово!");
+        $(By.xpath(myOpinion_textLabel)).setValue("Все здорово!");
     }
 
     @Step("Step {step}. Кликнуть на: {webElement}")

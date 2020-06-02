@@ -11,6 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DemoBusinessSBPage {
 
+    private String heading_text = "//a[@href='https://sbi.sberbank.ru:9444/ic/dcb/login.html?demoMode&version=3.0']";
+
     @Step("Step {step}. Проверить отображение элемента с текстом \"Иванов Иван Иванович\"")
     public void checkSuccessBusinessOnlineLogin(int step){
         String textToCheck = $(by("data-test-id", "HeaderProfileWidget__userName")).getText();
@@ -30,7 +32,7 @@ public class DemoBusinessSBPage {
 
     @Step("Step {step}. Кликнуть на \"Войти в демо режим\"")
     public void clickOnDemoMode(int step){
-        $(By.xpath("//a[@href='https://sbi.sberbank.ru:9444/ic/dcb/login.html?demoMode&version=3.0']")).click();
+        $(By.xpath(heading_text)).click();
     }
 
 }
